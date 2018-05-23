@@ -20,10 +20,9 @@
 				<div class="centerContent">
 					<form action="/BBSLike/ChangeRegistrationServlet" method="post">
 						<input type="hidden" name="userId" value="${loginUser.userId }">  <!-- aaaaaaa -->
-						<span class="para">パスワード:　</span><input type="password" name="pass" value="${loginUser.pass }"><br><br>
-						<span class="para">メールアドレス:　</span><input type="text" name="email" value="${loginUser.mail }"><br><br>
 						<span class="para">ユーザーネーム:　</span><input type="text" name="userName" value="${loginUser.name }"><br><br>
-						<span class="para">年齢:　</span><input type="text" name="age" value="${loginUser.age }"><br>
+						<span class="para">メールアドレス:　</span><input type="text" name="email" value="${loginUser.mail }"><br><br>
+						<span class="para">パスワード:　</span><input type="password" name="pass" value="${loginUser.pass }"><br><br>
 						<div class="submitButton"><input type="submit" value="登録"></div>
 					</form>
 				</div>

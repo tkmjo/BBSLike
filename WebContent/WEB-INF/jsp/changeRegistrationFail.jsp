@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="${pageContext.request.contextPath }/common/css/style.css">
 </head>
 <body>
-<div id="page">
+	<div id="page">
 		<div id="pageHead">
 			<!-- ヘッダー -->
 			<h1 id="siteTitle">SimpleBBS</h1>
@@ -17,11 +17,13 @@
 
 		<div id="pageBody">
 			<div id="pageBodyOnly">
+			<p class="fail">入力内容に誤りがあります。もう一度入力して下さい。</p>
 				<div class="centerContent">
-					<form action="/BBSLike/RegistrationServlet" method="post">
-						<span class="para">ユーザーネーム:　</span><input type="text" name="userName"><br><br>
-						<span class="para">メールアドレス:　</span><input type="text" name="email"><br><br>
-						<span class="para">パスワード:　</span><input type="password" name="pass"><br><br>
+					<form action="/BBSLike/ChangeRegistrationServlet" method="post">
+						<input type="hidden" name="userId" value="${loginUser.userId }">  <!-- aaaaaaa -->
+						<span class="para">パスワード:　</span><input type="password" name="pass" value="${loginUser.pass }"><br><br>
+						<span class="para">メールアドレス:　</span><input type="text" name="email" value="${loginUser.mail }"><br><br>
+						<span class="para">ユーザーネーム:　</span><input type="text" name="userName" value="${loginUser.name }"><br><br>
 						<div class="submitButton"><input type="submit" value="登録"></div>
 					</form>
 				</div>

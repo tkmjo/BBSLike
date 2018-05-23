@@ -1,16 +1,16 @@
 package model;
 
 public class Login {
-	private String userId;
 	private String pass;
+	private String mail;
 
-	public Login(String userId, String pass) {
-		this.userId = userId;
+	public Login(String mail, String pass) {
+		this.mail = mail;
 		this.pass = pass;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getMail() {
+		return mail;
 	}
 
 	public String getPass() {

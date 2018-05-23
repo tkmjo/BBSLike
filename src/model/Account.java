@@ -1,21 +1,26 @@
 package model;
 
 public class Account {
-	private String userId;
+	private int userId;
 	private String pass;
 	private String mail;
 	private String name;
-	private int age;
 
-	public Account(String userId, String pass, String mail, String name, int age) {
+	public Account(int userId, String pass, String mail, String name) {
 		this.userId = userId;
 		this.pass = pass;
 		this.mail = mail;
 		this.name = name;
-		this.age = age;
 	}
 
-	public String getUserId() {
+	// 登録時はuserIdがauto_incrementで入れられる為、userIdを除外としている。
+	public Account(String pass, String mail, String name) {
+		this.pass = pass;
+		this.mail = mail;
+		this.name = name;
+	}
+
+	public int getUserId() {
 		return userId;
 	}
 	public String getPass() {
@@ -26,8 +31,5 @@ public class Account {
 	}
 	public String getName() {
 		return name;
-	}
-	public int getAge() {
-		return age;
 	}
 }

@@ -19,7 +19,6 @@
 		<div id="pageBody">
 			<div id="pageBodyOnly">
 				<div class="notificationPara">
-					<p class="noti">ようこそ<c:out value="${userId.name }" />　さん</p>
 					<p>登録情報を変更しました。</p>
 					<p class="linkPara"><a href="/BBSLike/MainServlet">トピック一覧へ</a></p>
 				</div>

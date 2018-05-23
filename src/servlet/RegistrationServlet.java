@@ -26,15 +26,13 @@ public class RegistrationServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// リクエストパラメータの取得
 		request.setCharacterEncoding("UTF-8");
-		String userId = request.getParameter("userId");
 		String pass = request.getParameter("pass");
 		String email = request.getParameter("email");
 		String userName = request.getParameter("userName");
-		String strAge = request.getParameter("age");
-		int age = Integer.parseInt(strAge);
+
 
 		// 会員登録処理の実行
-		Account account = new Account(userId, pass, email, userName, age);
+		Account account = new Account(pass, email, userName);
 		RegistrationLogic registrationLogic = new RegistrationLogic();
 		boolean result = registrationLogic.registerAccount(account);
 
@@ -47,7 +45,14 @@ public class RegistrationServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registrationOK.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			response.sendRedirect("/BBSLike/RegistrationServlet");
+			HttpSession session = request.getSession();
+			session.setAttribute("account", account);
+
+			// フォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registrationFail.jsp");
+			dispatcher.forward(request, response);
+
+			// response.sendRedirect("/BBSLike/RegistrationServlet");
 		}
 	}
 

@@ -15,9 +15,12 @@
 			<h1 id="siteTitle">SimpleBBS</h1>
 		</div>
 
+
+
 		<div id="pageBody">
 			<div id="pageBodyOnly">
 				<div class="centerContent">
+				<p class="fail">入力内容に誤りがあります。もう一度入力して下さい。</p>
 					<form action="/BBSLike/RegistrationServlet" method="post">
 						<span class="para">ユーザーネーム:　</span><input type="text" name="userName"><br><br>
 						<span class="para">メールアドレス:　</span><input type="text" name="email"><br><br>

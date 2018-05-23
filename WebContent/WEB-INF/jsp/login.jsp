@@ -19,7 +19,7 @@
 			<div id="pageBodyOnly">
 				<div class="centerContent">
 					<form action="/BBSLike/LoginServlet" method="post">
-						<span class="para">ユーザーID:　</span><input type="text" name="userId"><br><br>
+						<span class="para">メールアドレス:　</span><input type="text" name="mail"><br><br>
 						<span class="para">パスワード:　</span><input type="password" name="pass"><br>
 						<div class="submitButton"><input type="submit" value="ログイン"></div>
 					</form>

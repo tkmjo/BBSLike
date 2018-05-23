@@ -27,11 +27,11 @@ public class LoginServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// リクエストパラメータの取得
 		request.setCharacterEncoding("UTF-8");
-		String userId = request.getParameter("userId");
+		String mail = request.getParameter("mail");
 		String pass = request.getParameter("pass");
 
 		// ログイン処理の実行
-		Login login = new Login(userId, pass);
+		Login login = new Login(mail, pass);
 		LoginLogic bo = new LoginLogic();
 		boolean result = bo.execute(login);
 		Account loginUser = bo.getUserAccount(login);
@@ -46,8 +46,13 @@ public class LoginServlet extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/loginOK.jsp");
 			dispatcher.forward(request, response);
 		} else {
-			// リダイレクト
-			response.sendRedirect("/BBSLike/LoginServlet");
+			// セッションスコープにユーザーIDを保存
+			HttpSession session = request.getSession();
+			session.setAttribute("loginUser", loginUser);
+
+			// フォワード
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/loginFail.jsp");
+			dispatcher.forward(request, response);;
 		}
 	}
 }

@@ -21,9 +21,9 @@ public class AccountDAO {
 			conn = DriverManager.getConnection("jdbc:h2:C:/data/bbsLike", "sa", "");
 
 			// SELECT文を準備
-			String sql = "SELECT USER_ID,PASS,MAIL,NAME,AGE FROM ACCOUNT WHERE USER_ID = ? AND PASS = ?";
+			String sql = "SELECT ID,PASS,MAIL,NAME FROM ACCOUNT WHERE MAIL = ? AND PASS = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, login.getUserId());
+			pStmt.setString(1, login.getMail());
 			pStmt.setString(2, login.getPass());
 
 			// SELECTを実行し、結果表を取得
@@ -32,13 +32,12 @@ public class AccountDAO {
 			// 一致したユーザーが存在した場合、そのユーザーを表すAccountインスタンスを生成
 			if (rs.next()) {
 				// 結果表からデータを取得
-				String userId = rs.getString("USER_ID");
+				int userId = rs.getInt("ID");
 				String pass = rs.getString("PASS");
 				String mail = rs.getString("MAIL");
 				String name = rs.getString("NAME");
-				int age = rs.getInt("AGE");
 
-				account = new Account(userId, pass, mail, name, age);
+				account = new Account(userId, pass, mail, name);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -71,16 +70,30 @@ public class AccountDAO {
 			conn = DriverManager.getConnection("jdbc:h2:C:/data/bbsLike", "sa", "");
 
 			// INSERT文を準備
-			String sql = "INSERT INTO ACCOUNT (USER_ID,PASS,MAIL,NAME,AGE) VALUES (?,?,?,?,?)";
+			String sql = "INSERT INTO ACCOUNT (PASS,MAIL,NAME) VALUES (?,?,?)";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
-			pStmt.setString(1, account.getUserId());
-			pStmt.setString(2, account.getPass());
-			pStmt.setString(3, account.getMail());
-			pStmt.setString(4, account.getName());
-			pStmt.setInt(5, account.getAge());
+			pStmt.setString(1, account.getPass());
+			pStmt.setString(2, account.getMail());
+			pStmt.setString(3, account.getName());
+
+			// Mailの空文字判定
+			if (account.getMail() == null || account.getMail().length() == 0) {
+				return false;
+			}
+
+			// Nameの空文字判定
+			if (account.getName() == null || account.getName().length() == 0) {
+				return false;
+			}
+
+			// PassWordの空文字判定
+			if (account.getPass() == null || account.getPass().length() == 0) {
+				return false;
+			}
 
 			// INSERT文を実行
 			int result = pStmt.executeUpdate();
+
 			if (result != 1) {
 				return false;
 			}
@@ -115,13 +128,26 @@ public class AccountDAO {
 			conn = DriverManager.getConnection("jdbc:h2:C:/data/bbsLike", "sa", "");
 
 			// UPDATE文を準備
-			String sql = "UPDATE ACCOUNT SET PASS = ?,MAIL = ?,AGE = ?,NAME = ? WHERE USER_ID = ?";
+			String sql = "UPDATE ACCOUNT SET PASS = ?,MAIL = ?,NAME = ?";
 			PreparedStatement pStmt = conn.prepareStatement(sql);
 			pStmt.setString(1, account.getPass());
 			pStmt.setString(2, account.getMail());
-			pStmt.setInt(3, account.getAge());
-			pStmt.setString(4, account.getName());
-			pStmt.setString(5, account.getUserId());
+			pStmt.setString(3, account.getName());
+
+			// Mailの空文字判定
+			if (account.getMail() == null || account.getMail().length() == 0) {
+				return false;
+			}
+
+			// Nameの空文字判定
+			if (account.getName() == null || account.getName().length() == 0) {
+				return false;
+			}
+
+			// PassWordの空文字判定
+			if (account.getPass() == null || account.getPass().length() == 0) {
+				return false;
+			}
 
 			// UPDATE文を実行
 			int result = pStmt.executeUpdate();

@@ -263,6 +263,11 @@ textarea {
 	background-color: #87CBDD;
 }
 
+#pageBodyOnly .centerContent p .fail {
+	text-align: left;
+	color: red;
+}
+
 #pageBodyOnly .centerContent .submitButton {
 	text-align: center;
 }
@@ -325,6 +330,10 @@ textarea {
 	background-color: #87CBDD;
 }
 
+/* “ü—ÍŽ¸”s‰æ–Ê */
+.fail {
+	color: red;
+}
 
 
 

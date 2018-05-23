@@ -34,15 +34,12 @@ public class ChangeRegistrationServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-		String userId = request.getParameter("userId");
 		String pass = request.getParameter("pass");
 		String email = request.getParameter("email");
 		String userName = request.getParameter("userName");
-		String strAge = request.getParameter("age");
-		int age = Integer.parseInt(strAge);
 
 		// 会員情報変更処理の実行
-		Account account = new Account(userId, pass, email, userName, age);
+		Account account = new Account(pass, email, userName);
 		RegistrationLogic registrationLogic = new RegistrationLogic();
 		boolean result = registrationLogic.execute(account);
 
