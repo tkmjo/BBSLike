@@ -89,6 +89,11 @@ public class BBSCommentDAO {
 			pStmt.setString(2, bbsComment.getResponseUserName());
 			pStmt.setString(3, bbsComment.getResponseContent());
 
+			// Mailの空文字判定
+			if (bbsComment.getResponseContent() == null || bbsComment.getResponseContent().length() == 0) {
+				return null;
+			}
+
 			// INSERT文を実行
 			int result = pStmt.executeUpdate();
 
