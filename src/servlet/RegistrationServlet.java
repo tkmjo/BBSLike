@@ -34,12 +34,12 @@ public class RegistrationServlet extends HttpServlet {
 		// 会員登録処理の実行
 		Account account = new Account(pass, email, userName);
 		RegistrationLogic registrationLogic = new RegistrationLogic();
-		boolean result = registrationLogic.registerAccount(account);
+		Account result = registrationLogic.registerAccount(account);
 
 		// 会員登録の成否によって処理を分岐
-		if (result) {
+		if (result != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("account", account);
+			session.setAttribute("loginUser", account);
 
 			// フォワード
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/registrationOK.jsp");

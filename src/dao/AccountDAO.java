@@ -60,8 +60,9 @@ public class AccountDAO {
 	}
 
 	// 会員登録画面よりアカウントを登録する処理
-	public boolean registerUser(Account account) {
+	public Account registerUser(Account account) {
 		Connection conn = null;
+		Account getAccount = null;
 		try {
 			// JDBCドライバを読み込む
 			Class.forName("org.h2.Driver");
@@ -78,32 +79,46 @@ public class AccountDAO {
 
 			// Mailの空文字判定
 			if (account.getMail() == null || account.getMail().length() == 0) {
-				return false;
+				return null;
 			}
 
 			// Nameの空文字判定
 			if (account.getName() == null || account.getName().length() == 0) {
-				return false;
+				return null;
 			}
 
 			// PassWordの空文字判定
 			if (account.getPass() == null || account.getPass().length() == 0) {
-				return false;
+				return null;
 			}
 
 			// INSERT文を実行
 			int result = pStmt.executeUpdate();
 
 			if (result != 1) {
-				return false;
+				return null;
+			}
+
+			String sqlRsult = "SELECT ID, NAME, MAIL, PASS FROM ACCOUNT WHERE MAIL = ?";
+			PreparedStatement pStmtResult = conn.prepareStatement(sqlRsult);
+			pStmtResult.setString(1, account.getMail());
+
+			ResultSet rs = pStmtResult.executeQuery();
+
+			while (rs.next()) {
+				int userId = rs.getInt("ID");
+				String name = rs.getString("NAME");
+				String mail = rs.getString("MAIL");
+				String pass = rs.getString("PASS");
+				getAccount = new Account(userId, name, mail, pass);
 			}
 
 		} catch (SQLException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
-			return false;
+			return null;
 		} finally {
 			// データベースを切断
 			if (conn != null) {
@@ -111,11 +126,11 @@ public class AccountDAO {
 					conn.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
-					return false;
+					return null;
 				}
 			}
 		}
-		return true;
+		return getAccount;
 	}
 
 	public boolean isRegisterUserChange(Account account) {

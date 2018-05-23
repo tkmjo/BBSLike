@@ -9,10 +9,10 @@ public class RegistrationLogic {
 		return result;
 	}
 
-	public boolean registerAccount(Account account) {
+	public Account registerAccount(Account account) {
 		AccountDAO dao = new AccountDAO();
-		boolean result = dao.registerUser(account);
-		return result;
+		Account getAccount = dao.registerUser(account);
+		return getAccount;
 	}
 
 	/*  いらない？

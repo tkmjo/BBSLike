@@ -21,7 +21,8 @@
 				<div class="notificationPara">
 					<p class="noti">ようこそ<c:out value="${account.name }" />　さん</p>
 					<p>登録が完了しました。</p>
-					<p class="linkPara"><a href="/BBSLike/LoginServlet">ログイン画面へ</a></p>
+					<p class="linkPara"><a href="/BBSLike/MainServlet">トピック一覧へ</a></p>
+					<p class="linkPara"><a href="/BBSLike/WelcomeServlet">トップヘ</a>
 				</div>
 			</div>
 		</div>
