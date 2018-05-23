@@ -136,6 +136,16 @@ public class BBSTitleDAO {
 			pStmt.setString(2, bbsTitle.getThreadUserName());
 			pStmt.setString(3, bbsTitle.getThreadContent());
 
+			// Mailの空文字判定
+			if (bbsTitle.getThreadTitle() == null || bbsTitle.getThreadTitle().length() == 0) {
+				return null;
+			}
+
+			// Nameの空文字判定
+			if (bbsTitle.getThreadContent() == null || bbsTitle.getThreadContent().length() == 0) {
+				return null;
+			}
+
 			// INSERT文を実行
 			int result = pStmt.executeUpdate();
 

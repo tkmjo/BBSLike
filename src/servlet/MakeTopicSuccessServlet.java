@@ -43,9 +43,15 @@ public class MakeTopicSuccessServlet extends HttpServlet {
 			List<Thread> bbsTitleRet = (List<Thread>) postBBSTitleListLogic.execute(bbsTitle);
 			session.setAttribute("bbsTitleRet", bbsTitleRet);
 
-			// フォワード
-			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/makeTopicSuccess.jsp");
-			dispatcher.forward(request, response);
+			if (bbsTitleRet == null) {
+				// フォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/makeTopicFail.jsp");
+				dispatcher.forward(request, response);
+			} else {
+				// フォワード
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/makeTopicSuccess.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 	}
 
